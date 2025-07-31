@@ -65,8 +65,7 @@ elif option == "Use webcam":
 
 # ----------------------- Prediction --------------------------
 if image is not None:
-    st.image(image, caption="Input Image", use_column_width=True)
-
+    # Prediction First
     input_tensor = image_transforms(image).unsqueeze(0)
 
     with torch.no_grad():
@@ -76,7 +75,8 @@ if image is not None:
         predicted_class = class_labels[predicted.item()]
         conf_percent = confidence.item() * 100
 
-    if conf_percent < 75:
+    # Show Prediction
+    if conf_percent < 80:
         st.warning(f"⚠️ Low Confidence: {conf_percent:.2f}%")
         st.info("Please share a photo with a **clear face close to the camera**.")
     else:
@@ -84,3 +84,6 @@ if image is not None:
             st.success(f"✅ Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
         else:
             st.error(f"🚫 Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
+
+    # Then Show Image
+    st.image(image, caption="Input Image", use_container_width=True)
