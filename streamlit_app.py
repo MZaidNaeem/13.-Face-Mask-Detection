@@ -45,7 +45,7 @@ class_labels = ['With Mask', 'Without Mask']
 
 # ----------------------- Streamlit UI --------------------------
 st.title("😷 Face Mask Detector")
-st.markdown("Upload a face image or use your webcam to check for a mask.")
+st.markdown("Upload a face image or use your webcam to check if you're wearing a mask.")
 
 # Input options
 st.subheader("Step 1: Select Image Source")
@@ -76,7 +76,11 @@ if image is not None:
         predicted_class = class_labels[predicted.item()]
         conf_percent = confidence.item() * 100
 
-    if predicted_class == 'With Mask':
-        st.success(f"✅ Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
+    if conf_percent < 75:
+        st.warning(f"⚠️ Low Confidence: {conf_percent:.2f}%")
+        st.info("Please share a photo with a **clear face close to the camera**.")
     else:
-        st.error(f"🚫 Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
+        if predicted_class == 'With Mask':
+            st.success(f"✅ Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
+        else:
+            st.error(f"🚫 Prediction: **{predicted_class}** ({conf_percent:.2f}% confidence)")
