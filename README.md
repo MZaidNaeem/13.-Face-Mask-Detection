@@ -2,7 +2,7 @@
 🛠️ Project: Face Mask Detection using CNN
 
 # Try the Web App
-[click to try](https://facemaskdetectionbyzaidnaeem.streamlit.app/)
+-----> [click to try](https://facemaskdetectionbyzaidnaeem.streamlit.app/)
 
 🧠 Today's Focus:
 I took a deep dive into computer vision today and built a Convolutional Neural Network (CNN) to detect whether a person is wearing a face mask or not. This model can play a vital role in public health compliance systems—especially in high-risk environments.
